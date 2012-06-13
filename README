@@ -11,7 +11,6 @@ Usage:
 
 Example:
 ./DAKMeans toy_norm2.txt 2174 2 4 ./toy_output
-
 Your resulted cluster centers should be close to the ones shown in toy_norm2_cluster.txt
 
 Compile:
