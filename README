@@ -11,7 +11,7 @@ Usage:
 
 Example:
 ./DAKMeans toy_norm2.txt 2174 2 4 ./toy_output
-Your resulted cluster centers should be close to the ones shown in toy_norm2_cluster.txt
+Your resulted cluster centers should be close to the ones shown in toy_norm2_cluster.txt.  Running this program on such a small toy example takes longer time than normal kmeans such as in Matlab, which is normal.  The efficiency of this program is much more significant/advantageous when handling larg scale datasets, such as tens of millions of samples. For example, running one round of this program on a dataset of 10 million feature point of 31 dimensions took about 2 hours, with <2GB memory and 5 threads.
 
 Compile:
 g++ DAKMeans.cpp -O3 -Wall -I/path/to/your/include -L/path/to/your/lib -o DAKMeans -lflann -pthread
