@@ -80,7 +80,7 @@ dim_stats=23
 K rows of statistics for K-means clusters, see [1] for details
 In each row, S: 
 S[0], distance of cluster center to its 1-nearest neighbor: d_{NN} 
-S[1], number of neighbors within distance: Nc=Rp*d_{NN}
+S[1], Nc, number of neighbors within distance Rp*d_{NN}
 S[2], distinctiveness statistics: P=(1-1/(Rp)^n)^Nc
 S[2*i+1], feature id of the ith nearest neighbor, i=1,2,...,10
 S[2*i+2], distance of the cluster center to the ith nearest neighbor, i=1,2,...,10
