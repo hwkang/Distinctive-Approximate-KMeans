@@ -1,0 +1,87 @@
+***************************************
+*** Distinctive Approximate K-Means ***
+***************************************
+Author: Hongwen Henry Kang (hongwenk@cs.cmu.edu)
+
+Implementation of:
+[1] Hongwen Kang, Martial Hebert, Takeo Kanade. "Image Matching with Distinctive Visual Vocabulary", In Proceedings of the IEEE Workshop on Applications of Computer Vision 2011 (WACV 2011). Kona, Hawaii, 2011. 
+
+Usage: 
+./DAKMeans feats.txt num_feat dim_feat K output_dir [cluster_output.txt] [memberof_output.txt] [flann_output.txt] [num_thread] [num_trial] [feat_select.txt] [lambda] [Rp] [n] [cluster_stats.txt] [weight_file] [cluster_init]
+
+Compile:
+g++ DAKMeans.cpp -O3 -Wall -I/path/to/your/include -L/path/to/your/lib -o DAKMeans -lflann -pthread
+Replace /path/to/your/include and /path/to/your/lib with corresponding path to your include directory and lib directory, or others where you placed the FLANN library in.
+
+Require:
+1. FLANN library: http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
+2. pthread library
+
+Software features:
+1. Approximate nearest neighbor in cluster assignment (using FLANN library) 
+2. Multiple threading (using pthread library)
+3. Measuring statistics of K-Means to find distictive clusters [1]
+4. Select portions of features points from the input feature file (default: use all features) 
+5. Apply different weightings to the selected features points (default: equally weighted)
+6. Allows for discarding feature points with slack variable lambda
+
+Input format:
+1. Feature file: [nxp]
+n rows of p space separated float numbers, each row corresponds to a feature point
+
+2. Select file: [nx1]
+n rows of binary 0|1 numbers, feature i is selected if row i is 1, otherwise ignored
+Total number of 1s: m
+default: m=n
+
+3. Weight file: [nx1]
+n rows of float values, each corresponding to the weight of a feature
+
+4. number of clusters, K: [1x1]
+
+5. num_thread: [1x1]
+number of threads to use. Should be equal to or less than number of clusters.
+default: 5
+
+6. num_trial: [1x1]
+number of trials to run K-means, the solution is updated after each trial if the energy reduces
+default: 5
+
+7. lambda: [1x1] or "null"
+Slacking variable for discarding feature points, if the minimum distance of a feature point to the cluster centers is greater than lambda, it is discarded.
+default: DBL_MAX, i.e. no feature points will be discarded
+"null" means using default value
+
+8. Rp [1x1] and n [1x1]
+see paper [1] for details
+
+9. cluster_init: "init"
+Flag to check whether we should use initialization used before.  This is to garauntee that the initializations are the same between different runs of the program, since K-means solution depends on initialization.  This is a good practice to compare results with different parameters.
+
+Output files format:
+1. cluster file: [Kxp]
+K rows of p space separated float numbers, each row corresponds to a cluster center
+
+2. memberof file: [mx1]
+m rows of integers ([0, K-1]), each corresponds to the cluster index of a feature point
+
+3. flann file: see FLANN library document
+
+4. cluster stats file: [Kxdim_stats]
+dim_stats=23
+K rows of statistics for K-means clusters, see [1] for details
+In each row, S: 
+S[0], distance of cluster center to its 1-nearest neighbor: d_{NN} 
+S[1], number of neighbors within distance: Nc=Rp*d_{NN}
+S[2], distinctiveness statistics: P=(1-1/(Rp)^n)^Nc
+S[2*i+1], feature id of the ith nearest neighbor, i=1,2,...,10
+S[2*i+2], distance of the cluster center to the ith nearest neighbor, i=1,2,...,10
+
+*Can be used as a quick and dirty way to calculate approximate K-means clustering
+*Please cite [1] if you are using this software.
+
+--
+Hongwen Henry Kang
+June 13, 2012
+www.hwkang.com
+--
