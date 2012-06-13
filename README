@@ -81,7 +81,9 @@ S[2], distinctiveness statistics: P=(1-1/(Rp)^n)^Nc
 S[2*i+1], feature id of the ith nearest neighbor, i=1,2,...,10
 S[2*i+2], distance of the cluster center to the ith nearest neighbor, i=1,2,...,10
 
-*Can be used as a quick and dirty way to calculate approximate K-means clustering
+*In its vanilla state, this program can be used as a way to calculate approximate K-means clustering, by ignoring the parameters related to distinctiveness statistics, e.g., lambda, Rp, n
+*This software is provided as-is, i.e., with absolutely no garauntee of service, please use it at your own risk.
+*Commercial use of this program is prohibited.
 *Please cite [1] if you are using this software.
 
 --
