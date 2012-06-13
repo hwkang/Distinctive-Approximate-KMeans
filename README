@@ -9,6 +9,9 @@ Implementation of:
 Usage: 
 ./DAKMeans feats.txt num_feat dim_feat K output_dir [cluster_output.txt] [memberof_output.txt] [flann_output.txt] [num_thread] [num_trial] [feat_select.txt] [lambda] [Rp] [n] [cluster_stats.txt] [weight_file] [cluster_init]
 
+Example:
+./DAKMeans toy_norm2.txt 2174 2 4 ./toy_output
+
 Compile:
 g++ DAKMeans.cpp -O3 -Wall -I/path/to/your/include -L/path/to/your/lib -o DAKMeans -lflann -pthread
 Replace /path/to/your/include and /path/to/your/lib with corresponding path to your include directory and lib directory, or others where you placed the FLANN library in.
