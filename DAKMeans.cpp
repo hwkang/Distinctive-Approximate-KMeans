@@ -428,6 +428,8 @@ int main(int argc, char **argv)
     }
 
     // default ANN parameters
+    // TODO is this the right default?
+    ann_para.algorithm = FLANN_INDEX_KDTREE;
     ann_para.target_precision = 0.9;
     ann_para.build_weight = 0.01;
     ann_para.memory_weight = 0.1;

@@ -133,6 +133,7 @@ float abs(float x){
   return x*(x>0?1:-1);
 }
 
+// TODO there are a couple of parameters in the new version of FLANN
 void saveFLANNParameters(FLANNParameters& ann_para, char* filename){
   FILE* fp = NULL;
   fp = fopen(filename, "wt");
